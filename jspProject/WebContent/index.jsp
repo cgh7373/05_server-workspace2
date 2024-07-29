@@ -40,8 +40,8 @@
 		
 	 -->
 
-	<% JDBCTemplate.getConnection(); %>
-
+	<%@ include file="views/common/menubar.jsp" %>	
+	
 
 
 

@@ -24,6 +24,7 @@ public class JDBCTemplate {
 		
 		try {
 			prop.load(new FileInputStream(filePath));
+//			prop에 filePath에 있는 키-밸류값 집어넣기
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
