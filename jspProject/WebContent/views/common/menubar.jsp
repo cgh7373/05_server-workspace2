@@ -7,6 +7,12 @@
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	// 로그인 시도 전 menubar.jsp 로딩시 : null
 	// 로그인 성공 후 menubar.jsp 로딩시 : 로그인한 회원정보가 담긴 멤버객체
+	
+	String alertMsg = (String)session.getAttribute("alertMsg");
+	// 서비스 요청 전 menubar.jsp 로딩시 : null
+	// 서비스 성공 후 menubar.jsp 로딩시 : alert로 띄워줄 메시지 문구
+	
+	
 %>
 
     <!DOCTYPE html>
@@ -43,10 +49,19 @@
                 background-color: darkgray;
             }
         </style>
+        
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+        
     </head>
 
     <body>
-
+    
+   
+	
         <h1 align="center">Welcome kh World</h1>
 
         <div class="login-area">
@@ -84,6 +99,11 @@
                         // 단순한 페이지 요청도 servlet 호출해서 servlet을 거치도록 할것!(url에 서블릿 매핑값만 나오게)
                         location.href = "<%= contextPath %>/enrollForm.me";
                     }
+                    
+                    <% if (alertMsg != null) { %>
+                	alert("<%= alertMsg %>");
+                	<% session.removeAttribute("alertMsg"); %>
+            		<% } %>
                 </script>
 
             </form> 
@@ -94,7 +114,7 @@
             <div>
                 <b><%=loginUser.getUserName() %></b>님의 방문을 환영합니다. <br><br>
                 <div align="center">
-                    <a href="javascript:void(0)">마이페이지</a>
+                    <a href="<%=contextPath %>/myPage.me">마이페이지</a>
                     <a href="<%=contextPath %>/logout.me">로그아웃</a>
                 </div>
             </div>
