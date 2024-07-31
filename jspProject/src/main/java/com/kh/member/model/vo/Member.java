@@ -4,6 +4,16 @@ import java.sql.Date;
 
 public class Member {
 
+	public Member(String userId, String userName, String phone, String email, String address, String interest) {
+		super();
+		this.userId = userId;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.address = address;
+		this.interest = interest;
+	}
+
 	private int userNo;
 	private String userId;
 	private String userPwd;
