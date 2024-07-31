@@ -12,15 +12,15 @@ public class Member {
 	private String email;
 	private String address;
 	private String interest;
-	private Date enrollDate;
-	private Date modifyDate;
+	private String enrollDate;
+	private String modifyDate;
 	private String status;
 	
 	// 기본생성자, 매개변수 생성자, setter/getter, toString (sh+al+s)
 	public Member() {}
 
 	public Member(int userNo, String userId, String userPwd, String userName, String phone, String email,
-			String address, String interest, Date enrollDate, Date modifyDate, String status) {
+			String address, String interest, String enrollDate, String modifyDate, String status) {
 		super();
 		this.userNo = userNo;
 		this.userId = userId;
@@ -111,19 +111,19 @@ public class Member {
 		this.interest = interest;
 	}
 
-	public Date getEnrollDate() {
+	public String getEnrollDate() {
 		return enrollDate;
 	}
 
-	public void setEnrollDate(Date enrollDate) {
+	public void setEnrollDate(String enrollDate) {
 		this.enrollDate = enrollDate;
 	}
 
-	public Date getModifyDate() {
+	public String getModifyDate() {
 		return modifyDate;
 	}
 
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 

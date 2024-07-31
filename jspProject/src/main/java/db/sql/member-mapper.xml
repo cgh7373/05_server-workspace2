@@ -23,6 +23,35 @@
 	
 	</entry>
 	
+	<entry key="selectMember">
+			select user_no
+				 , user_Id
+				 , user_pwd
+				 , user_name
+				 , phone
+				 , email
+				 , address
+				 , interest
+				 , enroll_date
+				 , modify_date
+				 , status
+			from member
+			where user_Id = ?
+			and status = 'Y'
+	</entry>
+	
+	<entry key="updateMember">
+			update member
+			set user_name = ?
+			, phone = ?
+			, email = ?
+			, address = ?
+			, interest = ?
+			, modify_date = sysdate
+		where user_id = ?
+			
+	</entry>
+	
 	<entry key="insertMember">
 	
 	  INSERT
@@ -49,6 +78,22 @@
 		    ,   ?
 		    )
 	
+	</entry>
+	
+	<entry key="updatePwdMember">
+				UPDATE MEMBER
+			       SET USER_PWD = ?
+			          , MODIFY_DATE = SYSDATE
+				 WHERE USER_ID = ?
+			       AND USER_PWD = ?
+	</entry>
+	
+	<entry key="deleteMember">
+				UPDATE MEMBER
+				SET STATUS = 'N'
+				, MODIFY_DATE = SYSDATE
+				WHERE USER_ID = ?
+				AND USER_PWD = ?
 	</entry>
 
 </properties>
