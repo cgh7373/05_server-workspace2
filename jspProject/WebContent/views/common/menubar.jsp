@@ -60,7 +60,12 @@
 
     <body>
     
-   
+   		<script>
+		   	 <% if (alertMsg != null) { %>
+		 	 alert("<%= alertMsg %>");
+		 	 <% session.removeAttribute("alertMsg"); %>
+			 <% } %>
+   		</script>
 	
         <h1 align="center">Welcome kh World</h1>
 
@@ -100,10 +105,7 @@
                         location.href = "<%= contextPath %>/enrollForm.me";
                     }
                     
-                    <% if (alertMsg != null) { %>
-                	alert("<%= alertMsg %>");
-                	<% session.removeAttribute("alertMsg"); %>
-            		<% } %>
+                   
                 </script>
 
             </form> 
@@ -129,7 +131,7 @@
         <div class="nav-area" align="center">
             
             <div class="menu"><a href=<%= request.getContextPath() %>>HOME</a></div>
-            <div class="menu"><a href="javascript:void(0)">공지사항</a></div>
+            <div class="menu"><a href="<%=contextPath%>/list.no">공지사항</a></div>
             <div class="menu"><a href="javascript:void(0)">일반게시판</a></div>
             <div class="menu"><a href="javascript:void(0)">사진게시판</a></div>
 
