@@ -147,8 +147,7 @@ public class MemberDao {
 			if (rset.next()) {
 				
 				m = new Member(
-						rset.getInt(0),
-						rset.getString(1),
+						rset.getInt(1),
 						rset.getString(2),
 						rset.getString(3),
 						rset.getString(4),
@@ -157,7 +156,8 @@ public class MemberDao {
 						rset.getString(7),
 						rset.getString(8),
 						rset.getString(9),
-						rset.getString(10)
+						rset.getString(10),
+						rset.getString(11)
 						);
 			}
 			

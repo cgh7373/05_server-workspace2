@@ -41,7 +41,7 @@
                     <br>
                     <h2 align="center">마이페이지</h2>
 
-                    <form id="mypage-form" action="<%= contextPath %> + /update.me" method="post">
+                    <form id="mypage-form" action="<%= contextPath %>/update.me" method="post">
 
                         <table>
                             <tr>

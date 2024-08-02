@@ -59,11 +59,13 @@
         <br><br>
 
         <div>
-            <a href="<%=contextPath%>/list.no">목록가기</a>
+            <a href="<%=contextPath%>/list.no" class="btn btn-sm btn-secondary">목록가기</a>
+            
             <!-- 현재 로그인한 사용자가 해당 글을 쓴 본인일 경우 -->
             <% if (loginUser != null && loginUser.getUserId().equals(n.getNoticeWriter())) { %>
-            <a href="">수정하기</a>
-            <a href="">삭제하기</a>
+            <a href="<%=contextPath %>/updateForm.no?num=<%=n.getNoticeNo() %>" class="btn btn-sm btn-warning">수정하기</a>
+            <!--                                요기 ? 뒤에 가 키=밸류 로 넘기는형태가되는것 -->
+            <a href="<%=contextPath%>/delete.no?num=<%=n.getNoticeNo() %>"class="btn btn-sm btn-danger">삭제하기</a>
             <% } %>
         </div>
 

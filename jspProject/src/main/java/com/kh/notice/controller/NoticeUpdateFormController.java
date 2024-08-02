@@ -11,16 +11,16 @@ import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NoticeDetailController
+ * Servlet implementation class NoticeUpdateFormController
  */
-@WebServlet("/detail.no")
-public class NoticeDetailController extends HttpServlet {
+@WebServlet("/updateForm.no")
+public class NoticeUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeDetailController() {
+    public NoticeUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +32,10 @@ public class NoticeDetailController extends HttpServlet {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("num"));
 		
-		// 조회수 증가
-		int result = new NoticeService().increaseCount(noticeNo);
+		Notice n = new NoticeService().selectNotice(noticeNo);
 		
-		if (result > 0) {
-			// 해당 공지사항 조회용 서비스
-			Notice n = new NoticeService().selectNotice(noticeNo);
-			
-			request.setAttribute("notice", n);
-			request.getRequestDispatcher("views/notice/noticeDetailView.jsp").forward(request, response);
-		} else {
-			
-		}
+		request.setAttribute("n", n);
+		request.getRequestDispatcher("views/notice/noticeUpdateForm.jsp").forward(request, response);;
 		
 	}
 

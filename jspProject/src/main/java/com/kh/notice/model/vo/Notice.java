@@ -13,6 +13,13 @@ public class Notice {
 	private String status;
 
 	public Notice() {}
+	
+	public Notice(int noticeNo, String noticeTitle, String noticeContent) {
+		super();
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+	}
 
 	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, Date createDate) {
 		super();
