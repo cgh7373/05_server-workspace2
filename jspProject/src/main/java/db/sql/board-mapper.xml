@@ -20,7 +20,7 @@
 	                                , BOARD_TITLE
 	                                , USER_ID
 	                                , COUNT
-	                                , CREATE_DATE
+	                                , TO_CHAR(CREATE_DATE, 'YYYY/MM/DD') "CREATE_DATE"
 	                             FROM BOARD B
 	                       		 JOIN CATEGORY USING(CATEGORY_NO)
 	                      	     JOIN MEMBER ON (BOARD_WRITER = USER_NO)
@@ -34,7 +34,12 @@
      WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
-
+	<entry key="selectCategoryList">
+		SELECT 
+		       CATEGORY_NO
+		     , CATEGORY_NAME
+		  FROM CATEGORY
+	</entry>
 
 
 

@@ -109,12 +109,9 @@ public class BoardListController extends HttpServlet {
 		// * 현재 요청한 페이지에 보여질 게시글 리스트 boardLimit수만큼 조회
 		ArrayList<Board> list = new BoardService().selectList(pi);
 		
-		if (!list.isEmpty()) {
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 			request.getRequestDispatcher("views/board/boardListView.jsp").forward(request, response);
-		}
-		
 	}
 
 	/**

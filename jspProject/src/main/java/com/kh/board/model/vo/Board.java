@@ -28,8 +28,6 @@ public class Board {
 		this.status = status;
 	}
 	
-	
-
 	public Board(int boardNo, String category, String boardTitle, String boardWriter, int count, String createDate) {
 		super();
 		this.boardNo = boardNo;

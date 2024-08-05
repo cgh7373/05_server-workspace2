@@ -6,6 +6,11 @@
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -19,7 +24,7 @@
         background-color: black;
         color: white;
         width: 1000px;
-        height: 500px;
+        height: 600px;
         margin: auto;
         margin-top: 50px;
     }
@@ -43,8 +48,8 @@
 
         <!-- 로그인한 회원만 볼수있는 div -->
         <% if (loginUser != null) { %>
-        <div align="right" style="width: 864px;">
-            <button>글작성</button>
+        <div align="right" style="width: 849px;">
+            <a href="<%=contextPath %>/enrollForm.bo" class="btn btn-sm btn-secondary">글작성</a>
             <br><br>
         </div>
         <% } %>
@@ -90,12 +95,41 @@
         <br><br>
 
         <div class="paging-area" align="center">
-            <button>&lt;</button>
-            <% for (int i = pi.getStartPage(); i <= pi.getEndPage(); i++) { %>
-            <button><%=i %></button>
-            <% } %>
-            <button>&gt;</button>
+        
+            <button onclick="prevPage()">&lt;</button>
+            
+            <% for (int p = startPage; p <= endPage; p++) { %>
+            	<% if (p == currentPage) { %>
+           			 <button disabled><%=p %></button>
+           	    <% } else { %>
+        			 <button onclick="toPage(<%=p%>)"><%=p %></button>
+            <% }} %>
+            
+            <button onclick="nextPage()">&gt;</button>
+            
+            <!-- <% if (currentPage != maxPage) { %>
+            	<button onclick="nextPage()">&gt;</button>
+            <% } %> 이런식으로 안보여버리게 하는방법도 있음 --> 
+            
         </div>
+
+		<script>
+			function prevPage() {
+				if (<%=currentPage%> > 1) {
+					location.href="<%=contextPath%>/list.bo?cPage=<%=currentPage - 1%>";
+				}
+			}
+			
+			function toPage(index) {
+				location.href="<%=contextPath%>/list.bo?cPage=" + index;
+			}
+			
+			function nextPage() {
+				if (<%=currentPage%> < <%=maxPage%>) {
+					location.href="<%=contextPath%>/list.bo?cPage=<%=currentPage + 1%>";
+				}
+			}
+		</script>
 
     </div>
 
