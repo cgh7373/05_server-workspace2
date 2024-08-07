@@ -33,6 +33,11 @@
         border: 1px solid white;
         text-align: center;
     }
+    
+    .list-area>tbody>tr:hover {
+    	background:gray;
+    	cursor:pointer;
+    }
 
 </style>
 
@@ -91,6 +96,14 @@
             </tbody>
 
         </table>
+        
+        <script>
+        	$(function() {
+        		$(".list-area>tbody>tr").click(function() {
+        			location.href="<%=contextPath%>/detail.bo?bNo=" + $(this).children().eq(0).text();
+        		})
+        	})
+        </script>
 
         <br><br>
 
