@@ -101,7 +101,7 @@ public class BoardInsertController extends HttpServlet {
 			b.setBoardWriter(boardWriter);
 			
 			Attachment at = null;
-			//multiRequest.getOriginalFileName("키") : 넘어온 첨부파일이 있으명 '원본명' | 없으면 null
+			//multiRequest.getOriginalFileName("키") : 넘어온 첨부파일이 있으면 '원본명' | 없으면 null
 			if (multiRequest.getOriginalFileName("upfile") != null) {
 				at = new Attachment();
 				at.setOriginName(multiRequest.getOriginalFileName("upfile"));

@@ -133,7 +133,7 @@
             <div class="menu"><a href=<%= request.getContextPath() %>>HOME</a></div>
             <div class="menu"><a href="<%=contextPath%>/list.no">공지사항</a></div>
             <div class="menu"><a href="<%=contextPath%>/list.bo?cPage=1">일반게시판</a></div>
-            <div class="menu"><a href="javascript:void(0)">사진게시판</a></div>
+            <div class="menu"><a href="<%=contextPath%>/list.th">사진게시판</a></div>
 
         </div>
 

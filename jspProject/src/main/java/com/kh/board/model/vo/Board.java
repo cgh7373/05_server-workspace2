@@ -11,6 +11,7 @@ public class Board {
 	private int count;
 	private String createDate;
 	private String status;
+	private String titltImg; // 썸네일경로를 보관할 필드
 	
 	public Board() {}
 
@@ -49,6 +50,14 @@ public class Board {
 		this.createDate = createDate;
 	}
 
+	public Board(int boardNo, String boardTitle, int count, String titltImg) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.count = count;
+		this.titltImg = titltImg;
+	}
+
 	public int getBoardNo() {
 		return boardNo;
 	}
@@ -63,6 +72,14 @@ public class Board {
 
 	public void setBoardType(int boardType) {
 		this.boardType = boardType;
+	}
+
+	public String getTitltImg() {
+		return titltImg;
+	}
+
+	public void setTitltImg(String titltImg) {
+		this.titltImg = titltImg;
 	}
 
 	public String getCategory() {

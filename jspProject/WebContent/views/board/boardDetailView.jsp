@@ -80,9 +80,20 @@
 
             <!-- 로그인한 사용자가 작성자일 경우 -->
             <% if (loginUser != null && loginUser.getUserId().equals(b.getBoardWriter())) { %>
-            <a href="" class="btn btn-sm btn-warning">수정하기</a>
-            <a href=""class="btn btn-sm btn-danger">삭제하기</a>
+            <a href="<%=contextPath%>/updateForm.bo?bNo=<%=b.getBoardNo()%>" class="btn btn-sm btn-warning">수정하기</a>
+            <a class="btn btn-sm btn-danger" onclick="dConfirm()">삭제하기</a>
             <% } %>
+            
+            <script>
+            
+            	function dConfirm() {
+            		if (confirm("삭제하시겠습니까?")) {
+            			location.href="<%=contextPath%>/delete.bo?bNo=<%=b.getBoardNo()%>"
+            		}
+            	}
+            
+            </script>
+            
         </div>
 
 

@@ -53,7 +53,7 @@
                         <select name="category">
                             <!-- category 테이블로부터 조회해와서 동적으로 만들것 -->
                             <% for (Category c : list) { %>
-                            <option value="<%=c.getCategoryNo()%>"><%=c.getCategotyName()%></option>
+                            <option value="<%=c.getCategoryNo()%>"><%=c.getCategoryName()%></option>
                             <% } %>
                         </select>
                     </td>

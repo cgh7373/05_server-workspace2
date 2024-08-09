@@ -104,6 +104,108 @@ public class BoardService {
 		
 		return at;
 	}
+
+	public int updateBoard(Board b, Attachment at) {
+		
+		Connection conn = getConnection();
+		
+		int result1 = new BoardDao().updateBoard(conn, b);
+		
+		int result2 = 1;
+		if (at != null) { // 새로운 첨부파일 있다
+			
+			if (at.getFileNo() != 0) { // 기존의 첨부파일이 있다 => update
+				
+				result2 = new BoardDao().updateAttachment(conn, at);
+				
+			} else { // 기존의 첨부파일이 없다 => insert
+				
+				result2 = new BoardDao().insertNewAttachment(conn, at);
+				
+			}
+			
+		}
+		
+		int result = result1 * result2;
+		
+		if (result == 1) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteBoard(int bNo) {
+		
+		Connection conn = getConnection();
+		
+		int result = new BoardDao().deleteBoard(conn, bNo);
+		
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+
+		return result;
+	}
+
+	public int insertThumbnailBoard(Board b, ArrayList<Attachment> list) {
+		
+		Connection conn = getConnection();
+		
+		int result1 = new BoardDao().insertThBoard(conn, b);
+		
+		int result2 = new BoardDao().insertAttachmentList(conn, list);
+		
+		int result = result1 * result2;
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+	
+	public ArrayList<Board> selectThumbnailList() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().selectThumbnailList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	public ArrayList<Attachment> selectAttachmentList(int boardNo) {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Attachment> list = new BoardDao().selectAttachmentList(conn, boardNo);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

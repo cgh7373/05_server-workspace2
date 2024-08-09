@@ -3,14 +3,14 @@ package com.kh.board.model.vo;
 public class Category {
 
 	private int categoryNo;
-	private String categotyName;
+	private String categoryName;
 	
 	public Category() {}
 
-	public Category(int categoryNo, String categotyName) {
+	public Category(int categoryNo, String categoryName) {
 		super();
 		this.categoryNo = categoryNo;
-		this.categotyName = categotyName;
+		this.categoryName = categoryName;
 	}
 
 	public int getCategoryNo() {
@@ -21,17 +21,17 @@ public class Category {
 		this.categoryNo = categoryNo;
 	}
 
-	public String getCategotyName() {
-		return categotyName;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setCategotyName(String categotyName) {
-		this.categotyName = categotyName;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [categoryNo=" + categoryNo + ", categotyName=" + categotyName + "]";
+		return "Category [categoryNo=" + categoryNo + ", categoryName=" + categoryName + "]";
 	}
 	
 	
