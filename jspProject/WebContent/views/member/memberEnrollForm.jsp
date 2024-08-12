@@ -39,7 +39,7 @@
                     <tr>
                         <td>* 아이디</td>
                         <td><input type="text" name="userId" maxlength="12" required></td>
-                        <td><button type="button">중복확인</button></td>
+                        <td><button type="button" onclick="idCheck();">중복확인</button></td>
                     </tr>
                     <tr>
                         <td>* 비밀번호</td>
@@ -98,7 +98,7 @@
                 <br><br>
     
                 <div align="center">
-                    <button type="submit">회원가입</button>
+                    <button type="submit" disabled>회원가입</button>
                     <button type="reset">초기화</button>
                 </div>
     
@@ -107,6 +107,45 @@
             </form>
 
         </div>
+        
+        <script>
+        	function idCheck() {
+        		
+        		// 중복확인 버튼 클릭시 사용자가 입력한 아이디값을 넘겨서 조회요청 => 응답데이터 돌려받기
+        		// 1) 사용불가능일 경우 => alert로 메시지출력, 다시입력하도록 유도
+        		// 2) 사용가능일 경우 	=> 진짜 사용할건지 의사 물어보기
+        		//   ㄴ> 사용하겠다는 경우 => 더이상 아이디 수정못하게, 회원가입버튼 활성화
+        		//   ㄴ> 사용안하겠다는 경우 => 다시입력하도록 유도
+        		
+        		// 아이디 입력한 input 요소 객체
+        		const $idInput = $("#enroll-form input[name=userId]");
+        		
+        		$.ajax({
+        			url : 'idCheck.me',
+        			data : {checkId : $idInput.val()},
+        			success : function(result) {
+        				console.log(result);
+        				if (result === "NNNNN") {
+                            alert('이미 존재하거나 탈퇴한 회원의 아이디입니다.');
+                            $idInput.select();
+                        } else {
+                        	if (confirm('사용가능한 아이디입니다. 사용하시겠습니까?')) {
+                        		$idInput.attr("readonly", true);
+                        		// $(":disabled").attr("disabled", false);
+                        		$("#enroll-form :submit").removeAttr("disabled");
+                        	} else {
+                        		alert('다시 입력하세요');
+                        		$idInput.focus();
+                        	}
+                        }
+        			},
+        			error : function() {
+        				console.log('아이디 중복체크용 ajax 통신 실패!');
+        			},
+        		});
+        		
+        	}
+        </script>
 
     </body>
 
