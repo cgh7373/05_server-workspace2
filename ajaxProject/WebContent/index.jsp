@@ -1,3 +1,4 @@
+<%@page import="com.kh.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -124,18 +125,158 @@
 		})
 	</script>
 	
+	<br>
 	
+	<h3>2. 버튼 클릭시 post 방식으로 서버에 여러개의 데이터 전송 및 응답</h3>
 	
+	이름 : <input type="text" id="input2_1"> <br>
+	나이 : <input type="number" id="input2_2"> <br>
+	<button onclick="test2();">전송</button> <br>
 	
+	<!-- 이만큼이 ver1
+	응답 : <label id="output2"></label>
 	
+	<script>
+		function test2() {
+			
+			$.ajax({
+				url : 'jqAjax2.do',
+				data : {
+					name : $("#input2_1").val(),
+					age : $("#input2_2").val(),
+				},
+				type : 'post',
+				success : function(result) {
+					$("label").text(result);
+					$("#input2_1").val("");
+					$("#input2_2").val("");
+				},
+				error : function() {
+					console.log('ajax 통신 실패');
+				},
+			})
+			
+		}
+	</script>
+	 -->
 	
+	<!-- ver2 -->
+	응답
+	<ul id="output2">
+		
+	</ul>
 	
+	<script>
+		function test2() {
+			$.ajax({
+				url : 'jqAjax2.do',
+				data : {
+					name : $("#input2_1").val(),
+					age : $("#input2_2").val(),
+				},
+				type : 'post',
+				success : function(a) {
+					
+					/* JSONArray 경우
+					console.log(a);
+					console.log(a[0]);
+					*/
+					
+					console.log(a);
+					console.log(a.name);
+					
+					const value = "<li>" + a.name + "</li>"
+								+ "<li>" + a.age + "</li>";
+								
+					$("#output2").html(value);
+					
+				},
+				error : function() {
+					console.log("ajax 통신 실패!");
+				},
+			});
+		}
+	</script>
 	
+	<br>
 	
+	<h3>3. 서버에 데이터 전송후, 조회된 vo객체를 응답데이터로</h3>
 	
+	검색하고자 하는 회원번호 : <input type="number" id="input3">
+	<button onclick="test3();">조회</button> 
 	
+	<div id="output3"></div>
 	
+	<script>
+		function test3() {
+			$.ajax({
+				url : 'jqAjax3.do',
+				data : {number : $("#input3").val(),},
+				success : function(a) {
+					
+					console.log(a);
+					
+					const value = "<br>이름 : " + a.userName + "<br>"
+								+ "나이 : " + a.age + "<br>"
+								+ "성별 : " + a.gender;
+								
+					$("#output3").html(value);
+					
+				},
+				error : function() {
+					console.log("ajax 통신 실패!");
+				},
+			});
+		}
+	</script>
 	
+	<br>
+	
+	<h3>4. 응답데이터로 조회된 여러 vo객체들에 담겨있는 ArrayList 받기</h3>
+	
+	<button onclick="test4();">회원 전체조회</button>
+	
+	<br> <br>
+	
+	<table id="output4" border="1">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>이름</th>
+				<th>나이</th>
+				<th>성별</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		</tbody>
+	</table>
+	
+	<script>
+		function test4() {
+			$.ajax({
+				url : 'jqAjax4.do',
+				success : function(a) { // [{}, {}, {}]
+					
+					let value = "";
+				
+					for (let i in a) {
+						value += "<tr>"
+								+ "<td>" + a[i].userNo + "</td>"
+								+ "<td>" + a[i].userName + "</td>"
+								+ "<td>" + a[i].age + "</td>"
+								+ "<td>" + a[i].gender + "</td>"
+								+ "</tr>"
+					}
+					
+					$("#output4 tbody").html(value);
+				},
+				error : function() {
+					console.log('ajax 통신 실패!');
+				},
+			})
+		}
+	</script>
 	
 	
 	

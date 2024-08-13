@@ -20,9 +20,10 @@
         background-color: black;
         color: aliceblue;
         width: 1000px;
-        height: 550px;
+        height: auto;
         margin: auto;
         margin-top: 50px;
+        margin-bottom: 50px;
     }
 </style>
 </head>
@@ -75,6 +76,96 @@
         
         <br>
 
+		<div id="reply-area">
+		
+			<table border="1" align="center">
+			
+				<thead>
+					<tr>
+						<th>댓글작성</th>
+						<% if (loginUser != null) { %>
+						<td>
+						<textarea id="replyContent" row="3" cols="46" style="resize:none;"></textarea>
+						</td>
+						<td><button onclick="insertReply();">댓글등록</button></td>
+						<% } else { %>
+						<td>
+						<textarea row="3" cols="46" style="resize:none;" readonly>로그인 후 이용가능한 서비스입니다.</textarea>
+						</td>
+						<td><button diabled>댓글등록</button></td>
+						<% } %>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr>
+						<td>admin</td>
+						<td>ㅎㅎㅎ</td>
+						<td>24/08/13 12:19</td>
+					</tr>
+				</tbody>
+				
+			</table>
+		
+			<script>
+			
+				$(function() {
+					selectReplyList();
+				})
+				
+				// ajax로 해당 게시글에 달린 댓글 목록 조회용
+				function selectReplyList() {
+					$.ajax({
+						url : 'rlist.bo',
+						data : {bNo:<%=b.getBoardNo()%>},
+						success : function(a) {
+	
+							let value = "";
+							
+							for (let i in a) {
+								value += "<tr>"
+									   + "<td>" + a[i].replyWriter + "</td>"
+									   + "<td>" + a[i].replyContent + "</td>"
+									   + "<td>" + a[i].createDate + "</td>"
+									   + "</tr>"
+							}
+							
+							
+							$("#reply-area tbody").html(value);
+						},
+						error : function() {
+							console.log("댓글 조회용 ajax 통신 실패!");
+						},
+					})
+				}
+				
+				// ajax로 해당 게시글에 댓글 작성하는 함수
+				function insertReply() {
+					$.ajax({
+						url : 'rinsert.bo',
+						data : {
+							content : $("#replyContent").val(),
+							bNo : <%=b.getBoardNo()%>,
+						},
+						type : 'post',
+						success : function(result) {
+							if (result > 0) { // 댓글작성성공 => 갱신된 댓글 리스트 조회
+								selectReplyList();
+								$("#replyContent").val("");
+							}
+						},
+						error : function() {
+							console.log("댓글작성용 ajax 통신실패");
+						},
+					})
+				}
+				
+			</script>
+		
+		</div>
+		
+		<br>
+		
         <div align="center">
             <a onclick="history.back()" class="btn btn-sm btn-secondary">목록가기</a>
 
