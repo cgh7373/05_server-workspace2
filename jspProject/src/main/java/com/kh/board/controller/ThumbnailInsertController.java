@@ -1,4 +1,4 @@
-package com.kh.board.controller;
+ package com.kh.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;

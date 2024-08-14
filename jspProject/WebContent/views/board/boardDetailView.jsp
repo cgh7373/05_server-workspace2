@@ -111,6 +111,8 @@
 			
 				$(function() {
 					selectReplyList();
+					
+					setInterval(selectReplyList, 10000);
 				})
 				
 				// ajax로 해당 게시글에 달린 댓글 목록 조회용
