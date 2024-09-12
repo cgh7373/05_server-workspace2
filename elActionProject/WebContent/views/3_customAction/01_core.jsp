@@ -1,3 +1,5 @@
+<%@page import="com.kh.model.vo.Person"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@
@@ -110,6 +112,163 @@
 	<c:if test="${ str ne '안녕하세요' }">
 		<h4>Bye World</h4>
 	</c:if>
+	
+	<h3>3. 조건문 - Choose (c:choose, c:when, c:otherwise)</h3>
+	<pre style="font-size:14px;">
+ - JAVA의 if-else, if-else if문과 비슷한 역할을 하는 태그
+ - 각 조건들을 c:choose의 하위요소로 c:when을 통해서 작성.. 마지막 else == c:otherwise
+	</pre>
+
+	<%--
+	<% if (num1 > 20) { %>	
+	~~~~~
+	<% } else if (num1 >= 10) { %>
+	~~~~~
+	<% } else { %>
+	~~~~~
+	<% } %>
+	--%>
+	
+	<c:choose>
+		<c:when test="${ num1 gt 20 }"> <!-- 주석은 choose, then, otherwise 사이에 샌드위치돼있으면 안됨.. 이자리가맞다 -->
+			<b>20보다 크다!</b>
+		</c:when>
+		
+		<c:when test="${ num1 ge 10 }">
+			<b>10보다는 크거나 같다!</b>
+		</c:when>
+		
+		<c:otherwise>
+			<b>10보다도 작다..</b>
+		</c:otherwise>
+	</c:choose>
+	
+	<hr>
+	
+	<h3>4. 반복문 - forEach</h3>
+	<pre style="font-size:14px;">
+ for loop문	- &lt;c:forEach var="변수명" begin="초기값" end="끝값" [step="반복증감값"]&gt;
+ 향상된 for문	- &lt;c:forEach var="변수명" items="배열/컬렉션" [varStatus="현재접근된요소의상태값을보관할변수명"]&gt; 
+ 
+ var 속성으로 선언된 변수에 접근할때는 반드시 EL 구문으로 접근
+	</pre>
+	
+	<% for (int i = 1; i <= 6; i++) { %>
+		<h<%=i %>><%=i %>..태그안에서도 적용가능</h<%=i %>>
+	<% } %>
+	
+	<br>
+	
+	<c:forEach var="i" begin="1" end="10" step="2">
+		반복확인 : ${ i } <br>
+	</c:forEach>
+	
+	<c:forEach var="i" begin="1" end="6">
+		<h${i}>${i}..태그안에서도 적용가능</h${i}>
+	</c:forEach>
+	
+	<c:set var="colors">
+		red, yellow, green, pink
+	</c:set>
+	
+	colors 변수값 : ${ colors } => 배열!<br>
+	
+	<ul>
+		<c:forEach var="c" items="${colors}">
+			<li style="color:${c}">${ c }</li>
+		</c:forEach>
+	</ul>
+	
+	<%
+		ArrayList<Person> list = new ArrayList<Person>();
+		list.add(new Person("차은우", 20, "남자"));
+		list.add(new Person("카리나", 21, "여자"));
+		list.add(new Person("아이유", 22, "여자"));
+	%>
+	
+	<c:set var="pList" value="<%=list%>" scope="request" />
+	
+	<table border="1">
+		<thead>
+			<tr>
+				<th>번호</th>
+				<th>이름</th>
+				<th>나이</th>
+				<th>성별</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+		<%-- 
+			<% if (pList.isEmpty()) { %>
+			
+			<% } else { %>
+				<% for (Person p : pList) { %>
+				
+				<% } %>
+			<% } %>
+		--%>
+		
+		<c:choose>
+			<c:when test="${ empty pList }">
+				<tr>
+					<td colspan="3">조회된 사람이 없습니다.</td>
+				</tr>
+			</c:when>
+			
+			<c:otherwise>
+				<c:forEach var="p" items="${ pList }" varStatus="s">
+					<tr>
+						<td>${ s.count }</td> <!-- index : 0부터 시작 count : 1부터 시작 -->
+						<td>${ p.name }</td>
+						<td>${ p.age }</td>
+						<td>${ p.gender }</td>
+					</tr>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+		</tbody>
+	</table>
+	
+	<br>
+	
+	<h3>5. 반복문 - forTokens</h3>
+	<pre style="font-size:14px;">
+ &lt;c:forTokens var="변수명" items="분리시킬문자열" delims="구분자"&gt;
+ 
+ - 구분자를 통해서 분리된 각각의 문자열에 순차적으로 접근하면서 반복 수행
+ - JAVA의 split 또는 StringTokenizer와 비슷한 기능 처리
+	</pre>
+	
+	<c:set var="device" value="컴퓨터, 핸드폰, tv.에어컨/냉장고.세탁기" />
+	
+	<ol>
+		<c:forTokens var="d" items="${ device }" delims="/,.">
+			<li>${d}</li>			
+		</c:forTokens>
+	</ol>
+	
+	<hr>
+	
+	<h3>6. url, 쿼리스트링 관련 - url, param</h3>
+	<pre style="font-size:14px;">
+ - url 경로를 생성하고, 쿼리스트링을 정의해둘수 있는 태그
+ 
+ &lt;c:url var="변수명" value="요청할 url"&gt;
+ 	&lt;c:param name="키값" value="전달할값" /&gt;
+ 	&lt;c:param name="키값" value="전달할값" /&gt;
+ &lt;/c:url&gt;
+ 	</pre>
+	
+	<a href="list.do?cpage=1&num=2">기존방식</a> <br>
+	
+	<c:url var="url" value="list.do">
+		<c:param name="cpage" value="1" />
+		<c:param name="num">2</c:param>
+	</c:url>
+	
+	<a href="${url}">c:url을 이용한 방식</a>
+	
 	
 
 </body>

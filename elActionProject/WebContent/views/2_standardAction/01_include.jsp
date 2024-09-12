@@ -15,14 +15,14 @@
 	
 	<h4>1. 기존의 include 지시어 이용한 방식 (정적 include 방식 == 컴파일시 포함이 되는 형태)</h4>
 
-	<!-- 
+	<%-- 
 	<br>
 	
 	특징 : include 하고있는 페이지상의 변수를 현재의 페이지에서도 사용가능 <br>
-	year from footer : year <br><br>
+	year from footer : <%=year%> <br><br>
 	
 	=> 단, 현재 페이지에서 동일한 이름의 변수를 선언할수 없음 <br>
-	-->
+	--%>
 	 
 	<h4>2. JSP 표준 액션 태그를 이용한 방식 (동적 include 방식 == 런타임시 포함되는 형태)</h4>
 
