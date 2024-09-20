@@ -82,7 +82,7 @@
 	<c:set var="outTest" value="<b>출력테스트</b>" />
 	
 	<c:out value="${outTest}" /> <!-- escapeXml 생략시 기본값 true --> <br>
-	<c:out value="${outTest}" escapeXml="false" /> 
+	<c:out value="${outTest}" escapeXml="false" /> <!-- true : text // false : html 이렇게보면될듯 -->
 	
 	<hr>
 	

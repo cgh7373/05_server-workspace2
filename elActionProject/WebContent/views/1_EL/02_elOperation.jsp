@@ -25,8 +25,8 @@
  	
  	10 &gt; 3 = ${ big > small } 또는 ${ big gt small } <br>
  	10 &lt; 3 = ${ big < small } 또는 ${ big lt small } <br>
- 	10 &gt; 3 = ${ big >= small } 또는 ${ big ge small } <br>
- 	10 &lt; 3 = ${ big <= small } 또는 ${ big le small } <br><br>
+ 	10 &gt;= 3 = ${ big >= small } 또는 ${ big ge small } <br>
+ 	10 &lt;= 3 = ${ big <= small } 또는 ${ big le small } <br><br>
  	
  	<h3>3. 동등 비교 연산</h3>
  	
